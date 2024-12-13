@@ -1,0 +1,216 @@
+html{
+    font-family: Poppins;
+    background-color: #202020;
+}
+
+*{
+    outline: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4842C2; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000; 
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.ModifSuppChang{
+  scale: 0;
+  transition: .2s;
+}
+
+.cardPlayerOfficiale:hover .ModifSuppChang{
+  scale: 1;
+}
+
+
+#formation{
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+}
+#TerrainSpace{
+  min-width: 1078px;
+  max-width: 1078px;
+  scale: .8;
+  transition: 1s;
+}
+@media screen and (max-width: 1540px) {
+  #TerrainSpace{
+    transition: 1s;
+  scale: .7
+}
+
+}
+
+/* Control Every Element Card */
+#card1,
+#card2,
+#card3,
+#card4,
+#card5,
+#card6,
+#card7,
+#card8,
+#card9,
+#card10,
+#card11 {
+  translate: -50%;
+  transition: top 0.3s ease, left 0.3s ease;
+}
+
+/* 442 Positionment */
+.formation-442 #card1 {
+    grid-template-areas: "ST";
+    top: 2%;
+    left: 35.5%;
+  }
+  .formation-442 #card2 {
+    grid-template-areas: "ST";
+    top: 2%;
+    left: 64.5%;
+  }
+  .formation-442 #card3 {
+    grid-template-areas: "LM";
+    top: 20%;
+    left: 16.5%;
+  }
+  .formation-442 #card4 {
+    grid-template-areas: "CM";
+    top: 23%;
+    left: 38.5%;
+  }
+  .formation-442 #card5 {
+    grid-template-areas: "CM";
+    top: 23%;
+    left: 60.5%;
+  }
+  .formation-442 #card6 {
+    grid-template-areas: "RM";
+    top: 20%;
+    left: 83.5%;
+  }
+  .formation-442 #card7 {
+    grid-template-areas: "LB";
+    top: 48%;
+    left: 14.5%;
+  }
+  .formation-442 #card8 {
+    grid-template-areas: "CB";
+    top: 52%;
+    left: 32.5%;
+  }
+  .formation-442 #card9 {
+    grid-template-areas: "CB";
+    top: 52%;
+    left: 67.5%;
+  }
+  .formation-442 #card10 {
+    grid-template-areas: "RB";
+    top: 48%;
+    left: 84.5%;
+  }
+  .formation-442 #card11 {
+    grid-template-areas: "GK";
+    left: 50%;
+    top: 62%;
+  }
+
+/*  433 Positionment  */
+.formation-433 #card1 {
+    top: 2%;
+    left: 19.5%;
+  }
+  .formation-433 #card2 {
+    top: 1%;
+    left: 50%;
+  }
+  .formation-433 #card3 {
+    top: 2%;
+    left: 80.5%;
+  }
+  .formation-433 #card4 {
+    top: 25%;
+    left: 25.5%;
+  }
+  .formation-433 #card5 {
+    top: 28%;
+    left: 50%;
+  }
+  .formation-433 #card6 {
+    top: 25%;
+    left: 74.5%;
+  }
+  .formation-433 #card7 {
+    top: 50%;
+    left: 15.5%;
+  }
+  .formation-433 #card8 {
+    top: 54%;
+    left: 32.5%;
+  }
+  .formation-433 #card9 {
+    top: 54%;
+    left: 67.5%;
+  }
+  .formation-433 #card10 {
+    top: 50%;
+    left: 84.5%;
+  }
+  .formation-433 #card11 {
+    left: 50%;
+    top: 63%;
+  }
+  
+
+  .custom-select {
+    width: 200px;
+    position: relative;
+  }
+
+  .custom-select select {
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .custom-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .custom-option img {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+  }
