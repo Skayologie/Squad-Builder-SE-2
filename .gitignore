@@ -14,8 +14,6 @@ jspm_packages/
 
 # Ignore Tailwind Config
 tailwind.config.js
-UML/
-ERD/
 SQL Scripts/
 Local Test
 Dashboard.php
