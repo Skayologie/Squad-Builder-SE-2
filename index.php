@@ -29,7 +29,7 @@
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
             <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">FUT - Admin</a>
-            <button class="w-full bg-white cta-btn font-semibold py-2 mt-5  rounded-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+            <button onclick="AddPlayer()" class="w-full bg-white cta-btn font-semibold py-2 mt-5  rounded-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                 <i class="fas fa-plus mr-3"></i>
                 Add New Player
             </button>
@@ -54,7 +54,7 @@
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6">
                 <h1 class="text-3xl text-black pb-6 BannerTitle">Dashboard</h1>
-                <div class="relative overflow-x-auto  sm:rounded-lg">
+                <div class="relative   sm:rounded-lg">
                     <div class="functionBar flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
                         <div class="hidden">
                             <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
@@ -121,19 +121,20 @@
                     </div>
                     <!-- The Main Section -->
                     <div id="demo">
-                        
 
                     </div>
                 </div>
             </main>
         </div>
     </div>
-    <script src="./assets/src/script/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous"></script>
     <!-- AlpineJS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
     <!-- Script Js For Icons From FontAwsome -->
     <script src="https://kit.fontawesome.com/285f192ded.js" crossorigin="anonymous"></script>
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <script src="./assets/src/script/index.js"></script>
 </body>
 </html>
