@@ -14,7 +14,6 @@ jspm_packages/
 
 # Ignore Tailwind Config
 tailwind.config.js
-SQL Scripts/
 Local Test
 Dashboard.php
 stadium.php
