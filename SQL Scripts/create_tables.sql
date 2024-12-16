@@ -11,6 +11,8 @@ CREATE TABLE players(
     nation_id INT,
     club_id INT 
 );
+Alter Table players ADD isArchive BOOLEAN;
+Alter Table players ADD isDeleted BOOLEAN;
 
 CREATE TABLE players_stats(
     player_id INT PRIMARY KEY,

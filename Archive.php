@@ -1,9 +1,31 @@
 <?php
 require ("config.php");
+$sql = "SELECT count(*) AS COUNT FROM players where isArchive = 1 AND isDeleted = 0";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    // output data of each row
+    $row = $result->fetch_assoc();
+}
 ?>
 
+<!-- Value card -->
+<div class="flex items-center justify-between p-4 bg-white rounded-md dark:bg-darker">
+    <div>
+    <h6
+        class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
+    >
+        Total Players Archived
+    </h6>
+    <span class="text-xl font-semibold"><?php echo $row["COUNT"] ?> Player</span>
+    </div>
+    <div>
+    <span>
+        <i style="color: #14b8a6;" class="text-3xl fa-solid fa-box-archive"></i>
+    </span>
+    </div>
+</div>
 <!-- Table Players -->
-<table class="w-full text-sm text-left rtl:text-right text-white dark:text-white">
+<table id="tableDATA" class="w-full text-sm text-left rtl:text-right text-white dark:text-white">
     <thead style="background-color:#155e75;" class="text-xs text-white uppercase ">
         <tr>
             <th scope="col" class="px-6 py-3 flex gap-[40px]">
@@ -42,7 +64,7 @@ require ("config.php");
     <tbody id="playerSearchResult">
         <?php
         $sql = ("SELECT * FROM players_stats 
-        JOIN players ON players.player_id = players_stats.player_id AND players.isArchive = 0
+        JOIN players ON players.player_id = players_stats.player_id AND players.isArchive = 1 AND players.isDeleted = 0
         JOIN nations ON nations.nation_id = players.nation_id
         JOIN clubs ON clubs.club_id = players.club_id");
         $result = $conn->query($sql);
@@ -86,12 +108,12 @@ require ("config.php");
                         <td class=" px-6 py-4">
                             '. $row["positioning_or_physical"].'
                         </td>
-                        <td class="flex items-center justify-center px-6 py-4">
-                            <div  href="#" class="font-medium text-2xl  hover:text-blue-500 ">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                        <td class="flex justify-center px-6 py-4">
+                            <div onclick="restoreThisPlayer('. $row["player_id"].')" class="font-medium text-2xl  hover:text-blue-500 ">
+                                <i class="fa-solid fa-trash-can-arrow-up"></i>
                             </div>
-                            <div onclick="archiveThisPlayer('.$row["player_id"].')" href="#" class="font-medium text-2xl  hover:text-blue-500 ml-[10px]">
-                                <i class="fa-solid fa-box-archive"></i>
+                            <div onclick="deleteThisPlayer('.$row["player_id"].')" class="font-medium text-2xl  hover:text-blue-500 ml-[10px]">
+                                <i class="fa-solid fa-trash"></i>
                             </div>
                         </td>
                     </tr>

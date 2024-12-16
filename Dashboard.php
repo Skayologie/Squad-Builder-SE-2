@@ -1,1 +1,4 @@
-<h1>Dashboard Admin</h1>
+<?php
+    require("./Cards.php");
+    require("./table.php");
+?>

@@ -6,7 +6,7 @@ if (isset($_GET["input"])) {
     $result = mysqli_query($conn, $sql);
     while ($row = mysqli_fetch_assoc($result)) {
         echo '
-            <option>'.$row["nation_name"].'</option>
+            <option value="'.$row["nation_id"].'">'.$row["nation_name"].'</option>
         ';
     }
 }
