@@ -1,4 +1,6 @@
 
+let image ;
+
 function loadtable() {
     document.querySelector(".functionBar").classList.remove("hidden")
     document.querySelector(".BannerTitle").innerHTML = "Players Informations"
@@ -10,6 +12,7 @@ function loadtable() {
     xhttp.open("GET", "table.php");
     xhttp.send();
 }
+
 function loadArchive() {
     // document.querySelector(".functionBar").classList.remove("hidden")
     document.querySelector(".BannerTitle").innerHTML = "Archived Players"
@@ -21,6 +24,7 @@ function loadArchive() {
     xhttp.open("GET", "Archive.php");
     xhttp.send();
 }
+
 function loadDashboard() {
     document.querySelector(".BannerTitle").innerHTML = "Dashboard"
     const xhttp = new XMLHttpRequest();
@@ -33,6 +37,7 @@ function loadDashboard() {
     xhttp.send();
     
 }
+
 function loadstad() {
     document.querySelector(".functionBar").classList.add("hidden")
     document.querySelector(".SideBtnTable").classList.remove("active-nav-link")
@@ -47,6 +52,7 @@ function loadstad() {
     xhttp.open("GET", "stadium.php");
     xhttp.send();
 }
+
 function AddPlayer() {
     document.querySelector(".BannerTitle").innerHTML = "Add Player"
     const xhttp = new XMLHttpRequest();
@@ -95,41 +101,8 @@ function AddPlayer() {
                 });
            
     },500)})
-//------------------------------------------------------------------
 
 
-
-// ------------------------Submit info-------------------------//
-    // setTimeout(()=>{
-    //     document.getElementById("SubmitPlayer").onclick = function() {
-    //         let formdata = {
-    //             playerName : document.getElementById("player_name").value,
-    //             playerCountr : document.getElementById("results-nations").value,
-    //             playerClub : document.getElementById("results-Club").value,
-    //             playerPosition : document.getElementById("results-position").value,
-    //             playerRating : document.getElementById("ratingRes").value
-    //         }
-           
-    //         if (playerName != "") {
-    //             $.ajax({
-    //                 url: 'submitPlayer.php', // The PHP script to process the search
-    //                 method: 'POST',
-    //                 data: formdata ,
-    //                 success: function () {
-    //                     alert("Submited Succeffully")
-    //                 },error: function () {
-    //                     alert("An error occurred while adding the player.");
-    //                 }
-
-
-                
-
-    //             });
-    //         } else {
-    //             loadDashboard(); // If the search box is empty, clear the results
-    //         }
-    //     }
-    //     },500);
 }
 
 function deleteThisPlayer(id) {
@@ -177,6 +150,18 @@ function restoreThisPlayer(id) {
     });
 }
 
+function getImage(){
+    let input = document.getElementById("file")
+    const file = input.files[0]
+    // Use FileReader to read the file and generate a URL
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        // Set the image src to the file URL
+        image = e.target.result;
+    }
+    reader.readAsDataURL(file);
+}
+
 function AddThisPlayer() {
     $.ajax({
         type: "POST",
@@ -193,10 +178,10 @@ function AddThisPlayer() {
             RefDrib : document.getElementById("RefDribb").value,
             SpeedDeff : document.getElementById("speedDeff").value,
             PositionPc : document.getElementById("PositioningPhisical").value,
-            p_Rating : document.getElementById("playerRating").value
+            p_Rating : document.getElementById("playerRating").value,
+            p_image : image
         } ,
         success: function(response) {
-            console.log(response)
             AddPlayer()
         },
         error: function(xhr, status, error) {
@@ -205,13 +190,8 @@ function AddThisPlayer() {
         }
     });
 }
-
-
-
-
-
  
- $('#playerSearcher').on('input', function() {
+$('#playerSearcher').on('input', function() {
     var searchText = $(this).val(); 
 
     

@@ -49,7 +49,7 @@ require ("config.php");
         if ($result-> num_rows > 0) {
             while ($row = $result-> fetch_assoc()) {
                     $sql = $row["p_name"];
-                    echo '
+                    echo '  
                     <tr class="bg-[#155e75] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#08475b]">
                         
                         <th scope="row" class="flex gap-2 items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">

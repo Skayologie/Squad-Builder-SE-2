@@ -5,8 +5,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     $row = $result->fetch_assoc();
-    
-  }
+}
 
 ?>
 <div class="mt-2">
