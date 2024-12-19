@@ -12,6 +12,18 @@ if ($resultTopPlayer->num_rows > 0) {
     // output data of each row
     $rowTOPPLAYER = $resultTopPlayer->fetch_assoc();
 }
+$ids = $rowTOPPLAYER['player_id'];
+$sqlAllPlayers = ("SELECT * FROM players_stats 
+        JOIN players ON players.player_id = '$ids'
+        JOIN nations ON nations.nation_id = players.nation_id
+        JOIN clubs ON clubs.club_id = players.club_id");
+
+$resultAllPlayer = $conn->query($sqlAllPlayers);
+if ($resultAllPlayer->num_rows > 0) {
+    // output data of each row
+    $rowALLPLAYER = $resultAllPlayer->fetch_assoc();
+}
+
 ?>
 <div class="mt-2">
 <!-- State cards -->
@@ -54,14 +66,18 @@ if ($resultTopPlayer->num_rows > 0) {
     >
         Top Player
     </h6>
-    <span class="text-xl font-semibold"><?= $rowTOPPLAYER['p_name'] ?></span>
-    <span class="text-xl font-semibold">
-        99
-    </span>
+    <div class=" items-center justify-center">
+        <span class="text-xl font-semibold"><?= $rowALLPLAYER['p_name'] ?> (<?= $rowALLPLAYER['position'] ?>)</span>
+        <div style="height:20px;" class="text-xl flex  font-semibold items-center ">
+            <div style="height:100%;"><img style="height:100%;" src="<?= $rowALLPLAYER['nation_logo'] ?>" alt=""></div>
+            <div style="height:100%;"><img style="height:100%;" src="<?= $rowALLPLAYER['club_logo'] ?>" alt=""></div>
+            <span class=" pl-2"><?= $rowALLPLAYER['rating'] ?></span>
+        </div>
+    </div>
     </div>
     <div style="background-color:red; width:20%; border-radius:8px; overflow:hidden;">
     <span >
-        <img src="<?= $rowTOPPLAYER['photo'] ?>" alt="">
+        <img src="<?= $rowALLPLAYER['photo'] ?>" alt="">
     </span>
     
     </div>
