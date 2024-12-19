@@ -105,7 +105,6 @@ function AddPlayer() {
 
 }
 
-
 function deleteThisPlayer(id) {
     $.ajax({
         type: "GET",
@@ -168,79 +167,109 @@ function getImage(){
     reader.readAsDataURL(file);
 
 }
+function checkOptimale(){
+    data = {
+        p_name : document.getElementById("player_name").value,
+        nation : document.getElementById("results-nations").value,
+        Club : document.getElementById("playerClub").value,
+        position : document.getElementById("playerPosition").value,
 
+        DivPace : document.getElementById("divingpace").value,
+        HandShot : document.getElementById("handlingShoting").value,
+        KickPassing : document.getElementById("kickingpassing").value,
+        RefDrib : document.getElementById("RefDribb").value,
+        SpeedDeff : document.getElementById("speedDeff").value,
+        PositionPc : document.getElementById("PositioningPhisical").value,
+        p_Rating : document.getElementById("playerRating").value,
+        p_image : image
+    }
+    
+    if (regex(data.p_name) && regexN(data.DivPace) && regexN(data.HandShot) && regexN(data.KickPassing) && regexN(data.RefDrib) 
+        && regexN(data.SpeedDeff) && regexN(data.PositionPc) && regexN(data.p_Rating)) 
+    { 
+        return true }
+    else{
+        return false
+    }
+
+}
 function AddThisPlayer(method) {
-    $.ajax({
-        type: "POST",
-        url: "AddThisPlayer.php",
-        data: {
-            p_name : document.getElementById("player_name").value,
-            nation : document.getElementById("results-nations").value,
-            Club : document.getElementById("playerClub").value,
-            position : document.getElementById("playerPosition").value,
-
-            DivPace : document.getElementById("divingpace").value,
-            HandShot : document.getElementById("handlingShoting").value,
-            KickPassing : document.getElementById("kickingpassing").value,
-            RefDrib : document.getElementById("RefDribb").value,
-            SpeedDeff : document.getElementById("speedDeff").value,
-            PositionPc : document.getElementById("PositioningPhisical").value,
-            p_Rating : document.getElementById("playerRating").value,
-            // p_image : image
-        } ,
-        success: function(response) {
-            if (method === "update") {
-                loadDashboard()
-            }else{
-                AddPlayer()
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Error archiving player:", error);
-            alert("Error archiving player.");
+        if (checkOptimale()) {
+            $.ajax({
+                type: "POST",
+                url: "AddThisPlayer.php",
+                data : {
+                    p_name : data.p_name,
+                    nation : data.nation,
+                    Club : data.Club,
+                    position : data.position,
+        
+                    DivPace : data.DivPace,
+                    HandShot : data.HandShot,
+                    KickPassing : data.KickPassing,
+                    RefDrib : data.RefDrib,
+                    SpeedDeff : data.SpeedDeff,
+                    PositionPc : data.PositionPc,
+                    p_Rating : data.p_Rating,
+                    p_image : image
+                } ,
+                success: function(response) {
+                    if (method === "update") {
+                        loadDashboard()
+                        console.log(response)
+        
+        
+                    }else{
+                        AddPlayer()
+                        console.log(response)
+                        
+                     
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error archiving player:", error);
+                    alert("Error archiving player.");
+                }
+            });
+        }else{
+            alert("there is a problem on the input")
         }
-    });
+    
 }
  
 function updatePlayer(id){
-    $.ajax({
-        type: "POST",
-        url: "updateThisPlayerPer.php",
-        data: {
-            id : id ,
-            p_name : document.getElementById("player_name").value,
-            nation : document.getElementById("results-nations").value,
-            Club : document.getElementById("playerClub").value,
-            position : document.getElementById("playerPosition").value,
+    if (checkOptimale()) {
+        $.ajax({
+            type: "POST",
+            url: "updateThisPlayerPer.php",
+            data: {
+                id : id ,
+                p_name : document.getElementById("player_name").value,
+                nation : document.getElementById("results-nations").value,
+                Club : document.getElementById("playerClub").value,
+                position : document.getElementById("playerPosition").value,
 
-            DivPace : document.getElementById("divingpace").value,
-            HandShot : document.getElementById("handlingShoting").value,
-            KickPassing : document.getElementById("kickingpassing").value,
-            RefDrib : document.getElementById("RefDribb").value,
-            SpeedDeff : document.getElementById("speedDeff").value,
-            PositionPc : document.getElementById("PositioningPhisical").value,
-            p_Rating : document.getElementById("playerRating").value,
-            p_image : image
-        } ,
-        success: function(response) {
-            loadDashboard()
-        },
-        error: function(xhr, status, error) {
-            console.error("Error archiving player:", error);
-            alert("Error archiving player.");
-        }
-    });
+                DivPace : document.getElementById("divingpace").value,
+                HandShot : document.getElementById("handlingShoting").value,
+                KickPassing : document.getElementById("kickingpassing").value,
+                RefDrib : document.getElementById("RefDribb").value,
+                SpeedDeff : document.getElementById("speedDeff").value,
+                PositionPc : document.getElementById("PositioningPhisical").value,
+                p_Rating : document.getElementById("playerRating").value,
+                p_image : image
+            } ,
+            success: function(response) {
+                loadDashboard()
+            },
+            error: function(xhr, status, error) {
+                console.error("Error archiving player:", error);
+                alert("Error archiving player.");
+            }
+        });
+    }else{
+        alert("there is a problem on the input")
+    }
 }
-// function UpdatePlayer() {
-//     document.querySelector(".BannerTitle").innerHTML = "Update Player"
-//     const xhttp = new XMLHttpRequest();
-//     xhttp.onload = function() {
-//         document.getElementById("demo").innerHTML =
-//         this.responseText;
-//     }
-//     xhttp.open("GET", "updateThisPlayer.php");
-//     xhttp.send();   
-// }
 
 function updateThisPlayer(id) {
     $.ajax({
@@ -259,6 +288,8 @@ function updateThisPlayer(id) {
         }
     });
 }
+
+
 $('#playerSearcher').on('input', function() {
     var searchText = $(this).val(); 
 

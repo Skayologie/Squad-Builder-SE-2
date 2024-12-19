@@ -56,6 +56,8 @@ if (isset($_POST['p_name']) && isset($_POST['nation']) && isset($_POST['Club']) 
 
 
 
+}else{
+    echo "Player Not Added";
 }
 
 

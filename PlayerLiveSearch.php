@@ -50,7 +50,7 @@ if (isset($_GET["searchText"])) {
                     '. $row["positioning_or_physical"].'
                 </td>
                  <td class="flex items-center justify-center px-6 py-4">
-                    <div href="#" class="font-medium text-2xl  hover:text-blue-500 ">
+                    <div onclick="updateThisPlayer('.$row["player_id"].')" class="font-medium text-2xl  hover:text-blue-500 ">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </div>
                     <div onclick="archiveThisPlayer('.$row["player_id"].')" href="#" class="font-medium text-2xl  hover:text-blue-500 ml-[10px]">
