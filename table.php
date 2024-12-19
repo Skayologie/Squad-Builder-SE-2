@@ -54,7 +54,7 @@ require ("config.php");
                         
                         <th scope="row" class="flex gap-2 items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <p class="text-white">'. $row["player_id"].'</p>
-                            <img class="w-[40px]" src="'. $row["photo"].'" alt="">
+                            <img id="photo'.$row["player_id"].'" class="w-[40px]" src="'. $row["photo"].'" alt="">
                             <p class="text-white">'. $row["p_name"].'</p>
                             <div class="flex h-[15px] gap-3">
                                 <img class="h-[100%]" src="'. $row["nation_logo"].'" alt="">

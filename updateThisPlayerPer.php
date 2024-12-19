@@ -14,7 +14,15 @@ if (isset($_POST['p_name'])) {
     $refDrib = $_POST['RefDrib'];
     $speedDeff = $_POST['SpeedDeff'];
     $positionPc = $_POST['PositionPc'];
-    // $photo = $_POST['p_image'];
+    
+    if (isset($_POST['p_image'])) {
+        $photo = $_POST['p_image'];
+    }else{
+        $image = "SELECT photo FROM players WHERE player_id = $id";
+        $stmtImage = $conn->query($image);
+        $row = $stmtImage-> fetch_assoc();
+        $photo = $row["photo"];
+    }
 
     $sql = "UPDATE `players` 
             SET `p_name` = ?, `photo` = ?, `position` = ?, `availibility` = '1', `rating` = ?, `nation_id` = ?, `club_id` = ?, `isArchive` = '0', `isDeleted` = '0' 
@@ -36,6 +44,7 @@ if (isset($_POST['p_name'])) {
             $stmtStats->bind_param("ssssss", $divPace, $handShot, $kickPassing, $refDrib, $speedDeff, $positionPc);
             if ($stmtStats->execute()) {
                 echo "Player added successfully.";
+                echo $photo;
             }
         } else {
             echo "Error adding player: " . $stmt->error;

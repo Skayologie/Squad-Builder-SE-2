@@ -223,7 +223,6 @@ function updatePlayer(id){
             p_image : image
         } ,
         success: function(response) {
-            console.log(response)
             loadDashboard()
         },
         error: function(xhr, status, error) {
