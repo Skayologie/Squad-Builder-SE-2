@@ -1647,9 +1647,9 @@
     <!-- All javascript code in this project for now is just for demo DON'T RELY ON IT  -->
     <script src="https://kit.fontawesome.com/285f192ded.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.bundle.min.js"></script>
-    <script src="./assets/src/script/jquery.js"></script>
-    <script src="./assets/src/script/js/script.js"></script>
-    <script src="./assets/src/script/index.js"></script>
+    <script src="./assets/src/script/jquery.js?v=<?php echo time(); ?>"></script>
+    <script src="./assets/src/script/js/script.js?v=<?php echo time(); ?>"></script>
+    <script src="./assets/src/script/index.js?v=<?php echo time(); ?>"></script>
     <script>
       const setup = () => {
         const getTheme = () => {

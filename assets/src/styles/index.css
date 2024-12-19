@@ -1,4 +1,30 @@
-
-
-.formAdd{
+.ForInput{
+    /* background-color: red; */
+    max-width: 500px;
+    color: white;
+}
+.ForInput input{
+    /* background-color: red; */
+    color: white;
+}
+.imageUpdate{
+    /* background-color: red; */
+    height: 160px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.imageUpdate img {
+    border: 1px solid white;
+    /* background-color: red; */
+    height: 100%;
+    width: 160px;
+    object-fit: cover;
+   
+}
+#results-nations,
+#playerClub,
+#playerPosition{
+    padding:10px;
+    border-radius: 5px;
 }

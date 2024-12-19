@@ -47,4 +47,5 @@ ON DELETE CASCADE ;
 alter table players Add foreign key (club_id) references clubs(club_id) ON UPDATE CASCADE 
 ON DELETE CASCADE ;
 
-
+UPDATE `players` SET (`p_name`, `photo`, `position`, `availibility`, `rating`, `nation_id`, `club_id`, `isArchive` , `isDeleted`) 
+            VALUES ("d", "d", "d", '1', "d","d","d",'0','0') WHERE player_id = 2

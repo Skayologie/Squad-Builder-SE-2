@@ -13,7 +13,7 @@ if (isset($_GET["searchText"])) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo '
-                <tr class="bg-[#155e75] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#08475b]">
+            <tr class="bg-[#155e75] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#08475b]">
                 
                 <th scope="row" class="flex gap-2 items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <p class="text-white">'. $row["player_id"].'</p>

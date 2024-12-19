@@ -105,6 +105,7 @@ function AddPlayer() {
 
 }
 
+
 function deleteThisPlayer(id) {
     $.ajax({
         type: "GET",
@@ -152,17 +153,23 @@ function restoreThisPlayer(id) {
 
 function getImage(){
     let input = document.getElementById("file")
+    let imageOutput = document.getElementById("imageOutput")
     const file = input.files[0]
     // Use FileReader to read the file and generate a URL
     const reader = new FileReader();
     reader.onload = function(e) {
         // Set the image src to the file URL
         image = e.target.result;
+        if (imageOutput) {
+            imageOutput.src = image
+        }
     }
+
     reader.readAsDataURL(file);
+
 }
 
-function AddThisPlayer() {
+function AddThisPlayer(method) {
     $.ajax({
         type: "POST",
         url: "AddThisPlayer.php",
@@ -179,10 +186,14 @@ function AddThisPlayer() {
             SpeedDeff : document.getElementById("speedDeff").value,
             PositionPc : document.getElementById("PositioningPhisical").value,
             p_Rating : document.getElementById("playerRating").value,
-            p_image : image
+            // p_image : image
         } ,
         success: function(response) {
-            AddPlayer()
+            if (method === "update") {
+                loadDashboard()
+            }else{
+                AddPlayer()
+            }
         },
         error: function(xhr, status, error) {
             console.error("Error archiving player:", error);
@@ -191,6 +202,64 @@ function AddThisPlayer() {
     });
 }
  
+function updatePlayer(id){
+    $.ajax({
+        type: "POST",
+        url: "updateThisPlayerPer.php",
+        data: {
+            id : id ,
+            p_name : document.getElementById("player_name").value,
+            nation : document.getElementById("results-nations").value,
+            Club : document.getElementById("playerClub").value,
+            position : document.getElementById("playerPosition").value,
+
+            DivPace : document.getElementById("divingpace").value,
+            HandShot : document.getElementById("handlingShoting").value,
+            KickPassing : document.getElementById("kickingpassing").value,
+            RefDrib : document.getElementById("RefDribb").value,
+            SpeedDeff : document.getElementById("speedDeff").value,
+            PositionPc : document.getElementById("PositioningPhisical").value,
+            p_Rating : document.getElementById("playerRating").value,
+            p_image : image
+        } ,
+        success: function(response) {
+            console.log(response)
+            loadDashboard()
+        },
+        error: function(xhr, status, error) {
+            console.error("Error archiving player:", error);
+            alert("Error archiving player.");
+        }
+    });
+}
+// function UpdatePlayer() {
+//     document.querySelector(".BannerTitle").innerHTML = "Update Player"
+//     const xhttp = new XMLHttpRequest();
+//     xhttp.onload = function() {
+//         document.getElementById("demo").innerHTML =
+//         this.responseText;
+//     }
+//     xhttp.open("GET", "updateThisPlayer.php");
+//     xhttp.send();   
+// }
+
+function updateThisPlayer(id) {
+    $.ajax({
+        type: "POST",
+        url: "updateThisPlayer.php",
+        data: {
+            id : id
+        },
+        success: function(response) {
+            document.querySelector(".BannerTitle").innerHTML = "Update Player"
+            document.getElementById("demo").innerHTML = response
+        },
+        error: function(xhr, status, error) {
+            console.error("Error archiving player:", error);
+            alert("Error archiving player.");
+        }
+    });
+}
 $('#playerSearcher').on('input', function() {
     var searchText = $(this).val(); 
 

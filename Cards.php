@@ -6,7 +6,12 @@ if ($result->num_rows > 0) {
     // output data of each row
     $row = $result->fetch_assoc();
 }
-
+$topPlayerSql = "SELECT * FROM players WHERE isArchive = 0 ORDER BY rating DESC LIMIT 1";
+$resultTopPlayer = $conn->query($topPlayerSql);
+if ($resultTopPlayer->num_rows > 0) {
+    // output data of each row
+    $rowTOPPLAYER = $resultTopPlayer->fetch_assoc();
+}
 ?>
 <div class="mt-2">
 <!-- State cards -->
@@ -47,30 +52,18 @@ if ($result->num_rows > 0) {
     <h6
         class="text-xs font-medium leading-none tracking-wider text-gray-500 uppercase dark:text-primary-light"
     >
-        Users
+        Top Player
     </h6>
-    <span class="text-xl font-semibold">50,021</span>
-    <span class="inline-block px-2 py-px ml-2 text-xs text-green-500 bg-green-100 rounded-md">
-        +2.6%
+    <span class="text-xl font-semibold"><?= $rowTOPPLAYER['p_name'] ?></span>
+    <span class="text-xl font-semibold">
+        99
     </span>
     </div>
-    <div>
-    <span>
-        <svg
-        class="w-12 h-12 text-gray-300 dark:text-primary-dark"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        >
-        <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-        />
-        </svg>
+    <div style="background-color:red; width:20%; border-radius:8px; overflow:hidden;">
+    <span >
+        <img src="<?= $rowTOPPLAYER['photo'] ?>" alt="">
     </span>
+    
     </div>
 </div>
 
