@@ -1,5 +1,7 @@
 <?php
 require ("config.php");
+require("Cards.php")
+
 ?>
 
 <!-- Table Players -->
@@ -13,7 +15,7 @@ require ("config.php");
             <th scope="col" class="px-6 py-3">
                 Position
             </th>
-            <th title="FILTER BY RATING" style="cursor: pointer;" onclick="showFiltredData()" scope="col" class="px-6 py-3">
+            <th style="cursor: pointer;" onclick="loadDashboard()" scope="col" class="px-6 py-3">
                 Rating
             </th>
             <th scope="col" class="px-6 py-3">
@@ -44,7 +46,7 @@ require ("config.php");
         $sql = ("SELECT * FROM players_stats 
         JOIN players ON players.player_id = players_stats.player_id AND players.isArchive = 0
         JOIN nations ON nations.nation_id = players.nation_id
-        JOIN clubs ON clubs.club_id = players.club_id ORDER BY players.player_id ASC");
+        JOIN clubs ON clubs.club_id = players.club_id ORDER BY rating DESC");
         $result = $conn->query($sql);
         if ($result-> num_rows > 0) {
             while ($row = $result-> fetch_assoc()) {

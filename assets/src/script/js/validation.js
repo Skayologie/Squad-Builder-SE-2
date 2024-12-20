@@ -6,7 +6,12 @@ function regex(checking){
 }
 
 function regexN(checking){
-    let NumberPattern = /[0-9]{2}/
+    let NumberPattern = /^[0-9]{2,2}$/
     return NumberPattern.test(checking)
 }
 
+function regexImg(checking){
+    if (checking.length != 0) {
+        return(true)
+    }
+}

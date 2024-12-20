@@ -15,3 +15,6 @@ jspm_packages/
 # Ignore Tailwind Config
 tailwind.config.js
 Local Test
+
+vendor
+.env

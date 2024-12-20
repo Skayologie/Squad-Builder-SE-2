@@ -1,5 +1,5 @@
 <?php 
-require("config.php");
+require $_SERVER['DOCUMENT_ROOT']."You Code/Breif 2/"."config.php";
 
 
 

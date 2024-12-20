@@ -3,7 +3,7 @@ require ("config.php");
 if (isset($_POST['p_name']) && isset($_POST['nation']) && isset($_POST['Club']) && isset($_POST['position']) &&
     isset($_POST['DivPace']) && isset($_POST['HandShot']) && isset($_POST['KickPassing']) && 
     isset($_POST['RefDrib']) && isset($_POST['SpeedDeff']) && isset($_POST['PositionPc']) && 
-    isset($_POST['p_Rating']) && isset($_POST['p_image'])) {
+    isset($_POST['p_Rating']) ) {
     
     $sqlGetId = "SELECT * FROM players ORDER BY player_id DESC";
     
@@ -57,7 +57,7 @@ if (isset($_POST['p_name']) && isset($_POST['nation']) && isset($_POST['Club']) 
 
 
 }else{
-    echo "Player Not Added";
+    print_r($_POST);
 }
 
 
