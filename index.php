@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require './vendor/autoload.php'; // Composer autoloader 
 require ("./config/config.php");
 $message="";
 $color="";

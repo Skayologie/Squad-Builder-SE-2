@@ -1,4 +1,5 @@
 <?php
+require '../../vendor/autoload.php'; // Composer autoloader 
 require ("../../config/config.php");
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
