@@ -1,10 +1,12 @@
 <?php
-require ("config.php");
-require("Cards.php")
+include("../../config/config.php");
+include("../Show/Cards.php");
+
 
 ?>
 
 <!-- Table Players -->
+<div class="w-full overflow-scroll">
 <table class="w-full text-sm text-left rtl:text-right text-white dark:text-white">
     <thead style="background-color:#155e75;" class="text-xs text-white uppercase ">
         <tr>
@@ -16,7 +18,10 @@ require("Cards.php")
                 Position
             </th>
             <th style="cursor: pointer;" onclick="loadDashboard()" scope="col" class="px-6 py-3">
-                Rating
+                <div class="flex justify-center  items-center gap-2" >
+                    Rating
+                    <i class="fa-solid fa-filter"></i>
+                </div>
             </th>
             <th scope="col" class="px-6 py-3">
                 Pace
@@ -103,3 +108,4 @@ require("Cards.php")
         ?>
     </tbody>
 </table>
+</div>

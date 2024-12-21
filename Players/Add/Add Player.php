@@ -1,9 +1,5 @@
 <?php 
-require $_SERVER['DOCUMENT_ROOT']."You Code/Breif 2/"."config.php";
-
-
-
-
+require "../../config/config.php";
 ?>
 
 <div class="flex flex-col items-center ">

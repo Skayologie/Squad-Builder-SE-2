@@ -1,5 +1,6 @@
 <?php 
-require("config.php");
+require("../../config/config.php");
+
 if (isset($_POST["id"])) {
     $id = $_POST["id"];
 
@@ -33,7 +34,7 @@ if (isset($_POST["id"])) {
 
 }
 ?>
-<div class="w-[500px] flex justify-center gap-5">
+<div style="justify-self:center;" class="w-[500px]  flex justify-center gap-5">
     
     <div class="flex flex-col items-center">
         <div class="flex flex-col items-center">

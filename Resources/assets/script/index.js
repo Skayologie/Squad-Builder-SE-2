@@ -1,9 +1,26 @@
-
+// Get Image Se Form De base64 code
 let image ;
+function getImage(){
+    let input = document.getElementById("file")
+    let imageOutput = document.getElementById("imageOutput")
+    const file = input.files[0]
+    // Use FileReader to read the file and generate a URL
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        // Set the image src to the file URL
+        image = e.target.result;
+        if (imageOutput) {
+            imageOutput.src = image
+        }
+    }
+    reader.readAsDataURL(file);
+}
 
+
+// Load Table With All Data From table.php To The Index File
 function loadtable() {
     document.querySelector(".functionBar").classList.remove("hidden")
-    document.querySelector(".BannerTitle").innerHTML = "Players Informations"
+    document.querySelector(".BannerTitle").innerHTML = "Players ffInformations"
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         document.getElementById("demo").innerHTML =
@@ -13,18 +30,8 @@ function loadtable() {
     xhttp.send();
 }
 
-function loadArchive() {
-    // document.querySelector(".functionBar").classList.remove("hidden")
-    document.querySelector(".BannerTitle").innerHTML = "Archived Players"
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-        document.getElementById("demo").innerHTML =
-        this.responseText;
-    }
-    xhttp.open("GET", "Archive.php");
-    xhttp.send();
-}
 
+// Load Dashboard Content With To The Index File without refreshing The Page
 function loadDashboard() {
     document.querySelector(".BannerTitle").innerHTML = "Dashboard"
     const xhttp = new XMLHttpRequest();
@@ -33,11 +40,12 @@ function loadDashboard() {
         this.responseText;
         
     }
-    xhttp.open("GET", "Dashboard.php");
+    xhttp.open("GET", "./Players/Page/Dashboard.php");
     xhttp.send();
     
 }
 
+// Load Staduim
 function loadstad() {
     document.querySelector(".functionBar").classList.add("hidden")
     document.querySelector(".SideBtnTable").classList.remove("active-nav-link")
@@ -53,6 +61,8 @@ function loadstad() {
     xhttp.send();
 }
 
+//---------------------------------------Add Player Section-------------------------------------------//
+// Change The Content Of The Page To The Page Add Player For Adding Player To Database
 function AddPlayer() {
     document.querySelector(".BannerTitle").innerHTML = "Add Player"
     const xhttp = new XMLHttpRequest();
@@ -60,7 +70,7 @@ function AddPlayer() {
         document.getElementById("demo").innerHTML =
         this.responseText;
     }
-    xhttp.open("GET", "Add Player.php");
+    xhttp.open("GET", "./Players/Add/Add Player.php");
     xhttp.send();
 // ------------------------Clubs Search-------------------------//
     setTimeout(()=>{
@@ -105,10 +115,79 @@ function AddPlayer() {
 
 }
 
+// Function That Execute The Add Player File Php To Add A New Player With All Data That Inserted From The user
+function AddThisPlayer(method) {
+    if (checkOptimale()) {
+        var input_image = document.getElementById("file").files
+        if (regexImg(input_image)) {
+            data = {
+                p_name : document.getElementById("player_name").value,
+                nation : document.getElementById("results-nations").value,
+                Club : document.getElementById("playerClub").value,
+                position : document.getElementById("playerPosition").value,
+        
+                DivPace : document.getElementById("divingpace").value,
+                HandShot : document.getElementById("handlingShoting").value,
+                KickPassing : document.getElementById("kickingpassing").value,
+                RefDrib : document.getElementById("RefDribb").value,
+                SpeedDeff : document.getElementById("speedDeff").value,
+                PositionPc : document.getElementById("PositioningPhisical").value,
+                p_Rating : document.getElementById("playerRating").value,
+                p_image : image
+            }
+            $.ajax({
+                type: "POST",
+                url: "./Players/Add/AddThisPlayer.php",
+                data : {
+                    p_name : data.p_name,
+                    nation : data.nation,
+                    Club : data.Club,
+                    position : data.position,
+        
+                    DivPace : data.DivPace,
+                    HandShot : data.HandShot,
+                    KickPassing : data.KickPassing,
+                    RefDrib : data.RefDrib,
+                    SpeedDeff : data.SpeedDeff,
+                    PositionPc : data.PositionPc,
+                    p_Rating : data.p_Rating,
+                    p_image : data.p_image
+                } ,
+                success: function(response) {
+                    if (method === "update") {
+                        loadDashboard()
+                        console.log(response)
+        
+        
+                    }else{
+                        AddPlayer()
+                        setTimeout(()=>{
+                            document.getElementById("alertMSG").classList.remove("hidden")
+                            setTimeout(()=>{
+                                document.getElementById("alertMSG").classList.add("hidden")
+                            },3000)
+                        },500)
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error archiving player:", error);
+                    alert("Error archiving player.");
+                }
+            });
+        }else{
+            alert("Please , Add The Image !")
+        }
+    }else{
+        alert("there is a problem on the input !")
+    }
+
+}
+
+//---------------------------------------Delete Player Section-------------------------------------------//
 function deleteThisPlayer(id) {
     $.ajax({
         type: "GET",
-        url: "deleteThisPlayer.php",
+        url: "./Players/Delete/deleteThisPlayer.php",
         data: {id : id} ,
         success: function(response) {
             loadArchive();
@@ -119,11 +198,25 @@ function deleteThisPlayer(id) {
         }
     });
 }
+//----------------------------------------------------------------------------------------------------//
+
+//---------------------------------Archive & Restore Player Section-----------------------------------//
+// Load Archive With All Archived Players From Archive.php To The Index File without refreshing The Page
+function loadArchive() {
+    document.querySelector(".BannerTitle").innerHTML = "Archived Players"
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+    }
+    xhttp.open("GET", "./Players/Archive/Archive.php");
+    xhttp.send();
+}
 
 function archiveThisPlayer(id) {
     $.ajax({
         type: "GET",
-        url: "ArchiveThisPlayer.php",
+        url: "./Players/Archive/ArchiveThisPlayer.php",
         data: {id : id} ,
         success: function(response) {
             loadDashboard();
@@ -138,7 +231,7 @@ function archiveThisPlayer(id) {
 function restoreThisPlayer(id) {
     $.ajax({
         type: "GET",
-        url: "RestoreThisPlayer.php",
+        url: "./Players/Restore/RestoreThisPlayer.php",
         data: {id : id} ,
         success: function(response) {
             loadArchive();
@@ -149,25 +242,9 @@ function restoreThisPlayer(id) {
         }
     });
 }
+//----------------------------------------------------------------------------------------------------//
 
-function getImage(){
-    let input = document.getElementById("file")
-    let imageOutput = document.getElementById("imageOutput")
-    const file = input.files[0]
-    // Use FileReader to read the file and generate a URL
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        // Set the image src to the file URL
-        image = e.target.result;
-        if (imageOutput) {
-            imageOutput.src = image
-        }
-    }
-
-    reader.readAsDataURL(file);
-
-}
-
+// Function For Regex If it return True so thats means all good 
 function checkOptimale(){
     data = {
         p_name : document.getElementById("player_name").value,
@@ -184,7 +261,6 @@ function checkOptimale(){
         p_Rating : document.getElementById("playerRating").value,
         p_image : image,
     }
-    
     if (regex(data.p_name) && regexN(data.DivPace) && regexN(data.HandShot) && regexN(data.KickPassing) && regexN(data.RefDrib) 
         && regexN(data.SpeedDeff) && regexN(data.PositionPc) && regexN(data.p_Rating) ) { 
         data = {}
@@ -197,75 +273,12 @@ function checkOptimale(){
 
 }
 
-function AddThisPlayer(method) {
-        if (checkOptimale()) {
-            var input_image = document.getElementById("file").files
-            if (regexImg(input_image)) {
-                data = {
-                    p_name : document.getElementById("player_name").value,
-                    nation : document.getElementById("results-nations").value,
-                    Club : document.getElementById("playerClub").value,
-                    position : document.getElementById("playerPosition").value,
-            
-                    DivPace : document.getElementById("divingpace").value,
-                    HandShot : document.getElementById("handlingShoting").value,
-                    KickPassing : document.getElementById("kickingpassing").value,
-                    RefDrib : document.getElementById("RefDribb").value,
-                    SpeedDeff : document.getElementById("speedDeff").value,
-                    PositionPc : document.getElementById("PositioningPhisical").value,
-                    p_Rating : document.getElementById("playerRating").value,
-                    p_image : image
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "AddThisPlayer.php",
-                    data : {
-                        p_name : data.p_name,
-                        nation : data.nation,
-                        Club : data.Club,
-                        position : data.position,
-            
-                        DivPace : data.DivPace,
-                        HandShot : data.HandShot,
-                        KickPassing : data.KickPassing,
-                        RefDrib : data.RefDrib,
-                        SpeedDeff : data.SpeedDeff,
-                        PositionPc : data.PositionPc,
-                        p_Rating : data.p_Rating,
-                        p_image : data.p_image
-                    } ,
-                    success: function(response) {
-                        if (method === "update") {
-                            loadDashboard()
-                            console.log(response)
-            
-            
-                        }else{
-                            AddPlayer()
-                            console.log(response)
-                            alert(response)
-                            
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Error archiving player:", error);
-                        alert("Error archiving player.");
-                    }
-                });
-            }else{
-                alert("Please , Add The Image !")
-            }
-        }else{
-            alert("there is a problem on the input !")
-        }
-    
-}
- 
+//---------------------------------Update Player Section-----------------------------------//
 function updatePlayer(id){
     if (checkOptimale()) {
         $.ajax({
             type: "POST",
-            url: "updateThisPlayerPer.php",
+            url: "./Players/Modification/updateThisPlayerPer.php",
             data: {
                 id : id ,
                 p_name : document.getElementById("player_name").value,
@@ -284,10 +297,20 @@ function updatePlayer(id){
             } ,
             success: function(response) {
                 loadDashboard()
+                setTimeout(()=>{
+                    document.getElementById("alertMSG").classList.remove("hidden")
+                    setTimeout(()=>{
+                        document.getElementById("alertMSG").classList.add("hidden")
+                    },3000)
+                },500)
             },
             error: function(xhr, status, error) {
-                console.error("Error archiving player:", error);
-                alert("Error archiving player.");
+                setTimeout(()=>{
+                    document.getElementById("alertMSG").classList.remove("hidden")
+                    setTimeout(()=>{
+                        document.getElementById("alertMSG").classList.add("hidden")
+                    },3000)
+                },500)
             }
         });
     }else{
@@ -295,11 +318,10 @@ function updatePlayer(id){
     }
 }
 
-
 function updateThisPlayer(id) {
         $.ajax({
             type: "POST",
-            url: "updateThisPlayer.php",
+            url: "./Players/Modification/updateThisPlayer.php",
             data: {
                 id : id
             },
@@ -308,13 +330,14 @@ function updateThisPlayer(id) {
                 document.getElementById("demo").innerHTML = response
             },
             error: function(xhr, status, error) {
-                console.error("Error archiving player:", error);
-                alert("Error archiving player.");
+                console.log("Error archiving player:", error);
+                alert("Error 11 archiving player.");
             }
         });
-    }
+}
+//----------------------------------------------------------------------------------------------------//
 
-
+// Filter Function
 function showFiltredData(){
         
         document.querySelector(".BannerTitle").innerHTML = "Dashboard (filtered by rating)"
@@ -323,18 +346,18 @@ function showFiltredData(){
             document.getElementById("demo").innerHTML =
             this.responseText;
         }
-        xhttp.open("GET", "showFiltredData.php");
+        xhttp.open("GET", "./Players/Filter/showFiltredData.php");
         xhttp.send();
-    }
+}
 
-
+// Search Part
 $('#playerSearcher').on('input', function() {
     var searchText = $(this).val(); 
 
     
     if (searchText != "") {
         $.ajax({
-            url: 'PlayerLiveSearch.php', 
+            url: './Players/Search/PlayerLiveSearch.php', 
             method: 'GET',
             data: { searchText: searchText },
             success: function(response) {
@@ -346,3 +369,7 @@ $('#playerSearcher').on('input', function() {
     }
 });
 
+$("#closeAlertMSG").on("click",()=>{
+    document.getElementById("alertMSG").classList.add("hidden")
+
+})

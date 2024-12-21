@@ -1,5 +1,5 @@
 <?php
-require("config.php");
+require("../../config/config.php");
 if (isset($_GET["searchText"])) {
     $sql = "SELECT * FROM players 
     JOIN nations ON nations.nation_id = players.nation_id 

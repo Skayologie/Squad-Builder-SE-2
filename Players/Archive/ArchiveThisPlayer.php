@@ -1,8 +1,8 @@
 <?php
-require ("config.php");
+require ("../../config/config.php");
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sql = "UPDATE `players` SET `isArchive` = 0 WHERE `player_id` = ?";
+    $sql = "UPDATE `players` SET `isArchive` = 1 WHERE `player_id` = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         // Bind the 'id' parameter to the prepared statement

@@ -1,5 +1,8 @@
 <?php
-require ("config.php");
+session_start();
+require ("../../config/config.php");
+
+
 if (isset($_POST['p_name'])) {
     $id = $_POST['id'];
     $p_name = $_POST['p_name'];
@@ -43,11 +46,12 @@ if (isset($_POST['p_name'])) {
         if ($stmt->execute()) {
             $stmtStats->bind_param("ssssss", $divPace, $handShot, $kickPassing, $refDrib, $speedDeff, $positionPc);
             if ($stmtStats->execute()) {
-                echo "Player added successfully.";
-                echo $photo;
+                $_SESSION["messageBack"] = "Player Updated successfully.";
+                $_SESSION["messageColor"] = "green";
             }
         } else {
-            echo "Error adding player: " . $stmt->error;
+                $_SESSION["messageBack"] = "There is problem ";
+                $_SESSION["messageColor"] = "red";
         }
 
         // Close the statement
@@ -55,8 +59,5 @@ if (isset($_POST['p_name'])) {
     }else {
         echo "Error preparing the SQL statement.";
     }
-
-
-
 }
 
