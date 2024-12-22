@@ -120,6 +120,7 @@ function AddThisPlayer(method) {
     if (checkOptimale()) {
         var input_image = document.getElementById("file").files
         if (regexImg(input_image)) {
+            document.getElementById("spinnerLoading").classList.remove("hidden")
             data = {
                 p_name : document.getElementById("player_name").value,
                 nation : document.getElementById("results-nations").value,
@@ -156,11 +157,11 @@ function AddThisPlayer(method) {
                 success: function(response) {
                     if (method === "update") {
                         loadDashboard()
-                        console.log(response)
-        
+                        document.getElementById("spinnerLoading").classList.add("hidden")
         
                     }else{
                         AddPlayer()
+                        document.getElementById("spinnerLoading").classList.add("hidden")
                         setTimeout(()=>{
                             document.getElementById("alertMSG").classList.remove("hidden")
                             setTimeout(()=>{
@@ -185,6 +186,7 @@ function AddThisPlayer(method) {
 
 //---------------------------------------Delete Player Section-------------------------------------------//
 function deleteThisPlayer(id) {
+    document.getElementById("spinnerLoading").classList.remove("hidden")
     $.ajax({
         type: "GET",
         url: "./Players/Delete/deleteThisPlayer.php",
@@ -214,6 +216,7 @@ function loadArchive() {
 }
 
 function archiveThisPlayer(id) {
+    document.getElementById("spinnerLoading").classList.remove("hidden")
     $.ajax({
         type: "GET",
         url: "./Players/Archive/ArchiveThisPlayer.php",
@@ -222,13 +225,13 @@ function archiveThisPlayer(id) {
             loadDashboard();
         },
         error: function(xhr, status, error) {
-            console.error("Error archiving player:", error);
-            alert("Error archiving player.");
+            loadDashboard();
         }
     });
 }
 
 function restoreThisPlayer(id) {
+    document.getElementById("spinnerLoading").classList.remove("hidden")
     $.ajax({
         type: "GET",
         url: "./Players/Restore/RestoreThisPlayer.php",
@@ -237,8 +240,7 @@ function restoreThisPlayer(id) {
             loadArchive();
         },
         error: function(xhr, status, error) {
-            console.error("Error archiving player:", error);
-            alert("Error archiving player.");
+            loadArchive();
         }
     });
 }
@@ -340,14 +342,14 @@ function updateThisPlayer(id) {
 // Filter Function
 function showFiltredData(){
         
-        document.querySelector(".BannerTitle").innerHTML = "Dashboard (filtered by rating)"
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function() {
-            document.getElementById("demo").innerHTML =
-            this.responseText;
-        }
-        xhttp.open("GET", "./Players/Filter/showFiltredData.php");
-        xhttp.send();
+    document.querySelector(".BannerTitle").innerHTML = "Dashboard (filtered by rating)"
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+    }
+    xhttp.open("GET", "./Players/Filter/showFiltredData.php");
+    xhttp.send();
 }
 
 // Search Part
